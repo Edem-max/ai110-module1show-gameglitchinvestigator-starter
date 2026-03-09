@@ -26,12 +26,21 @@ It wrote the code, ran away, and now the game is unplayable.
 ## 📝 Document Your Experience
 
 - [ ] Describe the game's purpose.
+- [ ] The game, "Glitchy Guesser," is a number-guessing game where players attempt to guess a randomly generated secret number within a specific range. The range and the number of attempts allowed are determined by the selected difficulty level (Easy, Normal, Hard). The game provides hints ("Go higher!" or "Go lower!") to guide the player based on their guesses.
 - [ ] Detail which bugs you found.
+- [ ] Detail which bugs you found:
+
+The hint logic in the check_guess function was incorrect. It always displayed "Go lower!" for numbers below 90 and "Go higher!" for numbers above 90, regardless of the actual secret number.
+The get_range_for_difficulty function had swapped ranges for Normal and Hard difficulties. Normal was set to 1–100, and Hard was set to 1–50, which was incorrect.
+On even attempts, the secret number was being cast to a string, causing lexicographic comparisons instead of numeric comparisons. This made the hints behave unpredictably.
 - [ ] Explain what fixes you applied.
+- [ ] Updated the check_guess function to correctly compare the guess with the secret number and provide appropriate hints ("Go higher!" or "Go lower!") based on the relationship between the two.
+Corrected the ranges in the get_range_for_difficulty function to ensure Easy is 1–20, Normal is 1–50, and Hard is 1–100.
+Removed the unnecessary casting of the secret number to a string, ensuring all comparisons are numeric and consistent throughout the game.
 
 ## 📸 Demo
 
-- [ ] [Insert a screenshot of your fixed, winning game here]
+- [ ] [<img width="757" height="437" alt="Screenshot 2026-03-09 at 01 15 37" src="https://github.com/user-attachments/assets/ce49261b-1265-46e4-95b7-e14d6d8756e6" />]
 
 ## 🚀 Stretch Features
 
