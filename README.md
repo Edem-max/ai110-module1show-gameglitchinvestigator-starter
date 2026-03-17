@@ -44,4 +44,5 @@ Removed the unnecessary casting of the secret number to a string, ensuring all c
 
 ## 🚀 Stretch Features
 
-- [ ] [If you choose to complete Challenge 4, insert a screenshot of your Enhanced Game UI here]
+- [ ] <img width="1097" height="253" alt="Screenshot 2026-03-17 at 22 17 41" src="https://github.com/user-attachments/assets/e6504613-8b19-47d0-9d35-ad117332cde4" />
+[If you choose to complete Challenge 4, insert a screenshot of your Enhanced Game UI here]
