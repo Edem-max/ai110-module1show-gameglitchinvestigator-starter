@@ -2,12 +2,7 @@ import random
 import streamlit as st
 
 def get_range_for_difficulty(difficulty: str):
-    if difficulty == "Easy":
-        return 1, 20
-    if difficulty == "Normal":
-        return 1, 100
-    if difficulty == "Hard":
-        return 1, 50
+    # Range is fixed at 1–100 for all difficulties; only attempt count varies per difficulty.
     return 1, 100
 
 
@@ -34,10 +29,12 @@ def check_guess(guess, secret):
         return "Win", "🎉 Correct!"
 
     try:
+        # FIX 1: Swapped the hint messages. If guess > secret the player needs
+        # to go lower, and if guess < secret they need to go higher.
         if guess > secret:
-            return "Too High", "📈 Go HIGHER!"
+            return "Too High", "📉 Go LOWER!"
         else:
-            return "Too Low", "📉 Go LOWER!"
+            return "Too Low", "📈 Go HIGHER!"
     except TypeError:
         g = str(guess)
         if g == secret:
@@ -106,8 +103,10 @@ if "history" not in st.session_state:
 
 st.subheader("Make a guess")
 
+# FIX 3 (continued): Use low/high variables so the displayed range updates
+# dynamically based on the selected difficulty instead of always showing 1–100.
 st.info(
-    f"Guess a number between 1 and 100. "
+    f"Guess a number between {low} and {high}. "
     f"Attempts left: {attempt_limit - st.session_state.attempts}"
 )
 
@@ -155,10 +154,10 @@ if submit:
     else:
         st.session_state.history.append(guess_int)
 
-        if st.session_state.attempts % 2 == 0:
-            secret = str(st.session_state.secret)
-        else:
-            secret = st.session_state.secret
+        # FIX 1 (continued): Always pass the integer secret. The original code
+        # converted it to a string on even attempts, causing broken string-based
+        # comparisons that made hints appear fixed around 90.
+        secret = st.session_state.secret
 
         outcome, message = check_guess(guess_int, secret)
 
